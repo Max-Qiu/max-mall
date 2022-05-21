@@ -1,0 +1,28 @@
+server:
+  port: 50401 # 端口
+spring:
+  application:
+    name: user # 项目名称
+  profiles:
+    active: dev # 当前开发环境
+  cloud:
+    nacos:
+      server-addr: nacos:8848 # nacos服务端地址（注册中心 和 配置中心 地址）
+      config:
+        enabled: true # 启用配置中心。默认：true
+        encode: UTF-8 # 配置文件的文件编码，默认：UTF-8
+        refresh-enabled: false # 启用刷新配置。默认：true
+        timeout: 3000 # 客户端获取配置的超时时间（毫秒）。默认：3000
+        max-retry: 10 # nacos允许的最大服务器重新连接错误数。默认：无限次
+        server-addr: ${spring.cloud.nacos.server-addr} # 配置中心地址，如果和注册中心地址不一样，可单独配置
+        namespace: max-mall # 服务所在命名空间ID，一般用于隔离不同项目的服务。默认：
+        group: ${spring.profiles.active} # 服务所在分组，一般用于隔离不同环境的服务。默认：DEFAULT_GROUP
+        file-extension: yml # 配置文件的文件后缀。默认：properties
+        prefix: ${spring.application.name} # 配置文件对应的DataId前缀。默认：${spring.application.name}
+        extension-configs: # 扩展配置
+          - dataId: public.yml # 配置文件ID
+            group: public # 配置文件所在分组。默认：DEFAULT_GROUP
+            refresh: false # 是否启用刷新配置。默认：false
+          - dataId: public-${spring.profiles.active}.yml # 配置文件ID
+            group: ${spring.profiles.active} # 配置文件所在分组。默认：DEFAULT_GROUP
+            refresh: false # 是否启用刷新配置。默认：false

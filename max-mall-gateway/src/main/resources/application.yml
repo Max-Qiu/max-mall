@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - PreserveHostHeader # 转发 host
+      routes:

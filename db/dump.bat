@@ -1,1 +1,1 @@
-mysqldump -h127.0.0.1 -P3306 -uroot -p --single-transaction -F --skip-extended-insert --compact -R -r db.sql -B min_mall_order min_mall_product min_mall_stock min_mall_user
+mysqldump -h127.0.0.1 -P3306 -uroot -p --single-transaction -F --skip-extended-insert --compact -R -r db.sql -B max_mall_order max_mall_product max_mall_stock max_mall_user

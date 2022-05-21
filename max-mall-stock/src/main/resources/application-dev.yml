@@ -2,13 +2,9 @@ spring:
   # MySQL
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver # 驱动（可以省略，会自动根据url适配）
-    url: jdbc:mysql://mysql:3306/min_mall_stock?useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true # 连接地址
+    url: jdbc:mysql://mysql:3306/max_mall_stock?useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true # 连接地址
     username: root # 用户名
     password: 123 # 密码
-# 日志配置
-logging:
-  file:
-    name: ./log/${spring.application.name}.log
 #mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # SQL日志输出
