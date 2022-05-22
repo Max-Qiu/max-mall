@@ -4,3 +4,8 @@ spring:
       default-filters:
         - PreserveHostHeader # 转发 host
       routes:
+        # 商品 服务
+        - id: product
+          uri: lb://product
+          predicates:
+            - Path=/category/**
