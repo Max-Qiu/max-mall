@@ -20,8 +20,10 @@
     </properties>
 
     <modules>
-        <!-- 公告 -->
+        <!-- 公共 -->
         <module>max-mall-common</module>
+        <!-- 网关 -->
+        <module>max-mall-gateway</module>
         <!-- 订单 -->
         <module>max-mall-order</module>
         <!-- 商品 -->
@@ -101,13 +103,6 @@
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
-        </dependency>
-
-        <!-- Hutool工具包 -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>5.8.1</version>
         </dependency>
     </dependencies>
 

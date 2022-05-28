@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>max-mall-member</artifactId>
+    <artifactId>max-mall-user</artifactId>
 
     <dependencies>
         <!-- Web -->

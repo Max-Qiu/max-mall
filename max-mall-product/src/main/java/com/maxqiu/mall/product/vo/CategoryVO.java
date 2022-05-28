@@ -2,16 +2,17 @@ package com.maxqiu.mall.product.vo;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.util.CollectionUtils;
+
 import com.maxqiu.mall.product.entity.Category;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.collection.CollectionUtil;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 商品分类
+ * 商品分类 VO
  *
  * @author Max_Qiu
  */
@@ -37,7 +38,7 @@ public class CategoryVO {
     /**
      * 层级
      */
-    private Integer catLevel;
+    private Integer level;
 
     /**
      * 是否显示 0不显示 1显示
@@ -55,20 +56,18 @@ public class CategoryVO {
     private String icon;
 
     /**
-     * 计量单位
-     */
-    private String productUnit;
-
-    /**
      * 商品数量
      */
     private Integer productCount;
 
+    /**
+     * 子分类
+     */
     private List<CategoryVO> childList;
 
     public CategoryVO(Category category, List<CategoryVO> childList) {
-        BeanUtil.copyProperties(category, this);
-        if (CollectionUtil.isNotEmpty(childList)) {
+        BeanUtils.copyProperties(category, this);
+        if (!CollectionUtils.isEmpty(childList)) {
             this.childList = childList;
         }
     }

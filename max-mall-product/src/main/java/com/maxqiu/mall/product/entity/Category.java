@@ -47,11 +47,11 @@ public class Category extends Model<Category> {
     /**
      * 层级
      */
-    @TableField("cat_level")
-    private Integer catLevel;
+    @TableField("`level`")
+    private Integer level;
 
     /**
-     * 是否显示 0不显示 1显示
+     * 是否显示
      */
     @TableField("show_status")
     private Boolean showStatus;
@@ -67,12 +67,6 @@ public class Category extends Model<Category> {
      */
     @TableField("icon")
     private String icon;
-
-    /**
-     * 计量单位
-     */
-    @TableField("product_unit")
-    private String productUnit;
 
     /**
      * 商品数量
