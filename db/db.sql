@@ -8,6 +8,23 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `max_mall_product` /*!40100 DEFAULT CHA
 USE `max_mall_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mm_brand` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '品牌id',
+  `name` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '名称',
+  `logo` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标识',
+  `initial` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '首字母',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品品牌';
+/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `mm_brand` VALUES (1,'华为',NULL,'H');
+INSERT INTO `mm_brand` VALUES (3,'苹果',NULL,'A');
+INSERT INTO `mm_brand` VALUES (4,'三星',NULL,'S');
+INSERT INTO `mm_brand` VALUES (5,'小米',NULL,'M');
+INSERT INTO `mm_brand` VALUES (6,'OPPO',NULL,'O');
+INSERT INTO `mm_brand` VALUES (7,'VIVO',NULL,'V');
+INSERT INTO `mm_brand` VALUES (8,'诺基亚',NULL,'N');
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mm_category` (
   `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '分类id',
   `name` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '分类名称',

@@ -1,10 +1,9 @@
 package com.maxqiu.mall.product.rquest;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.URL;
 
@@ -18,7 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 商品分类
+ * 商品品牌
  *
  * @author Max_Qiu
  */
@@ -26,46 +25,30 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class CategoryRequest {
+public class BrandRequest {
     /**
-     * 分类id
+     * 品牌id
      */
     @Null(groups = AddValidGroup.class)
     @NotNull(groups = {UpdateValidGroup.class, DeleteValidGroup.class})
     private Integer id;
 
     /**
-     * 分类名称
+     * 名称
      */
-    @NotBlank(groups = {AddValidGroup.class, UpdateValidGroup.class})
+    @NotNull(groups = {AddValidGroup.class, UpdateValidGroup.class})
     private String name;
 
     /**
-     * 父分类id
-     *
-     * 分类一般不会移动，所以修改时，不支持修改父分类ID
-     */
-    @NotNull(groups = AddValidGroup.class)
-    @Null(groups = UpdateValidGroup.class)
-    private Integer parentId;
-
-    /**
-     * 是否显示
-     */
-    @NotNull(groups = {AddValidGroup.class, UpdateValidGroup.class})
-    private Boolean showStatus;
-
-    /**
-     * 排序
-     */
-    @NotNull(groups = {AddValidGroup.class, UpdateValidGroup.class})
-    @Min(0)
-    @Max(999)
-    private Integer sort;
-
-    /**
-     * 图标地址
+     * 标识
      */
     @URL
-    private String icon;
+    private String logo;
+
+    /**
+     * 首字母
+     */
+    @NotBlank(groups = {AddValidGroup.class, UpdateValidGroup.class})
+    @Pattern(regexp = "^[A-Z]$", groups = {AddValidGroup.class, UpdateValidGroup.class}, message = "只支持一个英文大写字母")
+    private String initial;
 }

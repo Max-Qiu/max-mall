@@ -10,6 +10,7 @@ import com.maxqiu.mall.product.entity.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 商品分类 VO
@@ -19,6 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class CategoryVO {
     /**
      * 分类id

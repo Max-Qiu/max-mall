@@ -15,7 +15,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * 商品分类
+ * 商品品牌
  *
  * @author Max_Qiu
  */
@@ -24,57 +24,33 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-@TableName("mm_category")
-public class Category extends Model<Category> {
+@TableName("mm_brand")
+public class Brand extends Model<Brand> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 分类id
+     * 品牌id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 分类名称
+     * 名称
      */
     @TableField("`name`")
     private String name;
 
     /**
-     * 父分类id
+     * 标识
      */
-    @TableField("parent_id")
-    private Integer parentId;
+    @TableField("logo")
+    private String logo;
 
     /**
-     * 层级
+     * 首字母
      */
-    @TableField("`level`")
-    private Integer level;
-
-    /**
-     * 是否显示
-     */
-    @TableField("show_status")
-    private Boolean showStatus;
-
-    /**
-     * 排序
-     */
-    @TableField("sort")
-    private Integer sort;
-
-    /**
-     * 图标地址
-     */
-    @TableField("icon")
-    private String icon;
-
-    /**
-     * 商品数量
-     */
-    @TableField("product_count")
-    private Integer productCount;
+    @TableField("`initial`")
+    private String initial;
 
     @Override
     public Serializable pkVal() {

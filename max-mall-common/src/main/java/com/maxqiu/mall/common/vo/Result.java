@@ -5,6 +5,7 @@ import com.maxqiu.mall.common.enums.ResultEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 通用返回对象
@@ -14,6 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Result<T> {
     /**
      * 状态码

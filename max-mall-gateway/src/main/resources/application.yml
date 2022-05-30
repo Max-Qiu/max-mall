@@ -8,4 +8,4 @@ spring:
         - id: product
           uri: lb://product
           predicates:
-            - Path=/category/**
+            - Path=/category/**,/brand/**
