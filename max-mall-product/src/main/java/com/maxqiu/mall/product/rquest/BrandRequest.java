@@ -42,7 +42,7 @@ public class BrandRequest {
     /**
      * 标识
      */
-    @URL
+    @URL(groups = {AddValidGroup.class, UpdateValidGroup.class})
     private String logo;
 
     /**

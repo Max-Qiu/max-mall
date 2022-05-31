@@ -59,13 +59,13 @@ public class CategoryRequest {
      * 排序
      */
     @NotNull(groups = {AddValidGroup.class, UpdateValidGroup.class})
-    @Min(0)
-    @Max(999)
+    @Min(value = 0, groups = {AddValidGroup.class, UpdateValidGroup.class})
+    @Max(value = 999, groups = {AddValidGroup.class, UpdateValidGroup.class})
     private Integer sort;
 
     /**
      * 图标地址
      */
-    @URL
+    @URL(groups = {AddValidGroup.class, UpdateValidGroup.class})
     private String icon;
 }
