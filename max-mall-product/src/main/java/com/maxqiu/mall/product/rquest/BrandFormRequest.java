@@ -7,7 +7,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.URL;
 
-import com.maxqiu.mall.common.vaild.AddValidGroup;
+import com.maxqiu.mall.common.vaild.CreateValidGroup;
 import com.maxqiu.mall.common.vaild.DeleteValidGroup;
 import com.maxqiu.mall.common.vaild.UpdateValidGroup;
 
@@ -25,30 +25,30 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class BrandRequest {
+public class BrandFormRequest {
     /**
      * 品牌id
      */
-    @Null(groups = AddValidGroup.class)
+    @Null(groups = CreateValidGroup.class)
     @NotNull(groups = {UpdateValidGroup.class, DeleteValidGroup.class})
     private Integer id;
 
     /**
      * 名称
      */
-    @NotNull(groups = {AddValidGroup.class, UpdateValidGroup.class})
+    @NotNull(groups = {CreateValidGroup.class, UpdateValidGroup.class})
     private String name;
 
     /**
      * 标识
      */
-    @URL(groups = {AddValidGroup.class, UpdateValidGroup.class})
+    @URL(groups = {CreateValidGroup.class, UpdateValidGroup.class})
     private String logo;
 
     /**
      * 首字母
      */
-    @NotBlank(groups = {AddValidGroup.class, UpdateValidGroup.class})
-    @Pattern(regexp = "^[A-Z]$", groups = {AddValidGroup.class, UpdateValidGroup.class}, message = "只支持一个英文大写字母")
+    @NotBlank(groups = {CreateValidGroup.class, UpdateValidGroup.class})
+    @Pattern(regexp = "^[A-Z]$", groups = {CreateValidGroup.class, UpdateValidGroup.class}, message = "只支持一个英文大写字母")
     private String initial;
 }

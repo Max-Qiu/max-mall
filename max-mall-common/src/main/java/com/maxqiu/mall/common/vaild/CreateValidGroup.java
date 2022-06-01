@@ -5,4 +5,4 @@ package com.maxqiu.mall.common.vaild;
  *
  * @author Max_Qiu
  */
-public interface AddValidGroup {}
+public interface CreateValidGroup {}

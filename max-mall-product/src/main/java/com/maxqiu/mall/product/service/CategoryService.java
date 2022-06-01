@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maxqiu.mall.product.entity.Category;
 import com.maxqiu.mall.product.mapper.CategoryMapper;
-import com.maxqiu.mall.product.rquest.CategoryRequest;
+import com.maxqiu.mall.product.rquest.CategoryFormRequest;
 import com.maxqiu.mall.product.vo.CategoryVO;
 
 /**
@@ -72,14 +72,14 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> {
      * 新增
      */
     @CacheEvict(allEntries = true)
-    public boolean save(CategoryRequest request) {
+    public boolean create(CategoryFormRequest formRequest) {
         Category category = new Category();
-        BeanUtils.copyProperties(request, category);
-        if (request.getParentId() == 0) {
+        BeanUtils.copyProperties(formRequest, category);
+        if (formRequest.getParentId() == 0) {
             // 父ID为0，则层级为一级菜单
             category.setLevel(1);
         } else {
-            Category p = getById(request.getParentId());
+            Category p = getById(formRequest.getParentId());
             category.setLevel(p.getLevel() + 1);
         }
         return super.save(category);
@@ -89,9 +89,9 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> {
      * 修改
      */
     @CacheEvict(allEntries = true)
-    public boolean update(CategoryRequest request) {
+    public boolean update(CategoryFormRequest formRequest) {
         Category category = new Category();
-        BeanUtils.copyProperties(request, category);
+        BeanUtils.copyProperties(formRequest, category);
         return super.updateById(category);
     }
 
@@ -99,7 +99,7 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> {
      * 删除
      */
     @CacheEvict(allEntries = true)
-    public boolean removeById(Integer id) {
+    public boolean delete(Integer id) {
         return super.removeById(id);
     }
 }

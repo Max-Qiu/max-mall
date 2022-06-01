@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.maxqiu.mall.common.vaild.AddValidGroup;
+import com.maxqiu.mall.common.vaild.CreateValidGroup;
 import com.maxqiu.mall.common.vaild.DeleteValidGroup;
 import com.maxqiu.mall.common.vaild.UpdateValidGroup;
 import com.maxqiu.mall.common.vo.Result;
 import com.maxqiu.mall.product.entity.Category;
-import com.maxqiu.mall.product.rquest.CategoryRequest;
+import com.maxqiu.mall.product.rquest.CategoryFormRequest;
 import com.maxqiu.mall.product.service.CategoryService;
 import com.maxqiu.mall.product.vo.CategoryVO;
 
@@ -42,51 +42,57 @@ public class CategoryController {
     /**
      * 新增分类
      */
-    @PostMapping("save")
-    public Result<String> save(@RequestBody @Validated(value = AddValidGroup.class) CategoryRequest request) {
-        if (request.getParentId() != 0) {
-            Category p = categoryService.getById(request.getParentId());
+    @PostMapping("create")
+    public Result<String> create(@RequestBody @Validated(value = CreateValidGroup.class) CategoryFormRequest formRequest) {
+        if (formRequest.getParentId() != 0) {
+            Category p = categoryService.getById(formRequest.getParentId());
             if (p.getLevel() >= 3) {
                 return Result.fail("父ID不能为三级");
             }
         }
-        return Result.byFlag(categoryService.save(request));
+        return Result.byFlag(categoryService.create(formRequest));
     }
 
     /**
      * 修改分类
      */
     @PostMapping("update")
-    public Result<String> update(@RequestBody @Validated(value = UpdateValidGroup.class) CategoryRequest request) {
+    public Result<String> update(@RequestBody @Validated(value = UpdateValidGroup.class) CategoryFormRequest formRequest) {
+        Category current = categoryService.getById(formRequest.getId());
+        if (current == null) {
+            return Result.fail("当前分类ID不存在");
+        }
         // 当隐藏菜单时
-        if (!request.getShowStatus()) {
+        if (!formRequest.getShowStatus()) {
             // 当前分类有商品在上架，不可以隐藏
-            Category current = categoryService.getById(request.getId());
             if (current.getProductCount() != 0) {
                 return Result.fail("当前分类有商品在上架时，不可以隐藏");
             }
         }
-        return Result.byFlag(categoryService.update(request));
+        return Result.byFlag(categoryService.update(formRequest));
     }
 
     /**
      * 删除分类
      */
-    @PostMapping("remove")
-    public Result<String> remove(@RequestBody @Validated(value = DeleteValidGroup.class) CategoryRequest request) {
+    @PostMapping("delete")
+    public Result<String> delete(@RequestBody @Validated(value = DeleteValidGroup.class) CategoryFormRequest formRequest) {
+        Category current = categoryService.getById(formRequest.getId());
+        if (current == null) {
+            return Result.fail("当前分类ID不存在");
+        }
         // 当前分类有商品在上架时，不可以删除
-        Category current = categoryService.getById(request.getId());
         if (current.getProductCount() != 0) {
             return Result.fail("当前分类有商品在上架时，不可以删除");
         }
         // 可能存在子分类时
         if (current.getLevel() <= 2) {
             // 获取子分类
-            List<Category> childList = categoryService.childListById(request.getId());
+            List<Category> childList = categoryService.childListById(formRequest.getId());
             if (!childList.isEmpty()) {
                 return Result.fail("存在子分类时，无法删除");
             }
         }
-        return Result.byFlag(categoryService.removeById(request.getId()));
+        return Result.byFlag(categoryService.delete(formRequest.getId()));
     }
 }

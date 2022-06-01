@@ -8,7 +8,7 @@ import javax.validation.constraints.Null;
 
 import org.hibernate.validator.constraints.URL;
 
-import com.maxqiu.mall.common.vaild.AddValidGroup;
+import com.maxqiu.mall.common.vaild.CreateValidGroup;
 import com.maxqiu.mall.common.vaild.DeleteValidGroup;
 import com.maxqiu.mall.common.vaild.UpdateValidGroup;
 
@@ -26,18 +26,18 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class CategoryRequest {
+public class CategoryFormRequest {
     /**
      * 分类id
      */
-    @Null(groups = AddValidGroup.class)
+    @Null(groups = CreateValidGroup.class)
     @NotNull(groups = {UpdateValidGroup.class, DeleteValidGroup.class})
     private Integer id;
 
     /**
      * 分类名称
      */
-    @NotBlank(groups = {AddValidGroup.class, UpdateValidGroup.class})
+    @NotBlank(groups = {CreateValidGroup.class, UpdateValidGroup.class})
     private String name;
 
     /**
@@ -45,27 +45,27 @@ public class CategoryRequest {
      *
      * 分类一般不会移动，所以修改时，不支持修改父分类ID
      */
-    @NotNull(groups = AddValidGroup.class)
+    @NotNull(groups = CreateValidGroup.class)
     @Null(groups = UpdateValidGroup.class)
     private Integer parentId;
 
     /**
      * 是否显示
      */
-    @NotNull(groups = {AddValidGroup.class, UpdateValidGroup.class})
+    @NotNull(groups = {CreateValidGroup.class, UpdateValidGroup.class})
     private Boolean showStatus;
 
     /**
      * 排序
      */
-    @NotNull(groups = {AddValidGroup.class, UpdateValidGroup.class})
-    @Min(value = 0, groups = {AddValidGroup.class, UpdateValidGroup.class})
-    @Max(value = 999, groups = {AddValidGroup.class, UpdateValidGroup.class})
+    @NotNull(groups = {CreateValidGroup.class, UpdateValidGroup.class})
+    @Min(value = 0, groups = {CreateValidGroup.class, UpdateValidGroup.class})
+    @Max(value = 999, groups = {CreateValidGroup.class, UpdateValidGroup.class})
     private Integer sort;
 
     /**
      * 图标地址
      */
-    @URL(groups = {AddValidGroup.class, UpdateValidGroup.class})
+    @URL(groups = {CreateValidGroup.class, UpdateValidGroup.class})
     private String icon;
 }

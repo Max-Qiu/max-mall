@@ -1,19 +1,20 @@
 package com.maxqiu.mall.product.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maxqiu.mall.product.entity.Brand;
 import com.maxqiu.mall.product.mapper.BrandMapper;
-import com.maxqiu.mall.product.rquest.BrandRequest;
-import com.maxqiu.mall.product.vo.BrandVO;
+import com.maxqiu.mall.product.rquest.BrandFormRequest;
+import com.maxqiu.mall.product.rquest.BrandPageRequest;
 
 /**
  * 商品品牌 服务类
@@ -24,11 +25,15 @@ import com.maxqiu.mall.product.vo.BrandVO;
 @CacheConfig(cacheNames = "BrandService", keyGenerator = "cacheKeyGenerator")
 public class BrandService extends ServiceImpl<BrandMapper, Brand> {
     /**
-     * 获取列表
+     * 根据品牌名称分页获取列表
      */
-    @Cacheable
-    public List<BrandVO> listVO() {
-        return super.list().stream().map(BrandVO::new).collect(Collectors.toList());
+    public Page<Brand> page(BrandPageRequest pageRequest) {
+        Page<Brand> page = new Page<>(pageRequest.getPageNumber(), pageRequest.getPageSize());
+        LambdaQueryWrapper<Brand> wrapper = Wrappers.lambdaQuery();
+        if (StringUtils.hasText(pageRequest.getName())) {
+            wrapper.like(Brand::getName, pageRequest.getName());
+        }
+        return page(page, wrapper);
     }
 
     /**
@@ -43,9 +48,9 @@ public class BrandService extends ServiceImpl<BrandMapper, Brand> {
      * 新增
      */
     @CacheEvict(allEntries = true)
-    public boolean save(BrandRequest request) {
+    public boolean create(BrandFormRequest formRequest) {
         Brand brand = new Brand();
-        BeanUtils.copyProperties(request, brand);
+        BeanUtils.copyProperties(formRequest, brand);
         return super.save(brand);
     }
 
@@ -53,9 +58,9 @@ public class BrandService extends ServiceImpl<BrandMapper, Brand> {
      * 修改
      */
     @CacheEvict(allEntries = true)
-    public boolean update(BrandRequest request) {
+    public boolean update(BrandFormRequest formRequest) {
         Brand brand = new Brand();
-        BeanUtils.copyProperties(request, brand);
+        BeanUtils.copyProperties(formRequest, brand);
         return super.updateById(brand);
     }
 
@@ -63,7 +68,7 @@ public class BrandService extends ServiceImpl<BrandMapper, Brand> {
      * 删除
      */
     @CacheEvict(allEntries = true)
-    public boolean removeById(Integer id) {
+    public boolean delete(Integer id) {
         return super.removeById(id);
     }
 }
