@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -26,6 +28,9 @@ import com.maxqiu.mall.product.vo.CategoryVO;
 @Service
 @CacheConfig(cacheNames = "CategoryService", keyGenerator = "cacheKeyGenerator")
 public class CategoryService extends ServiceImpl<CategoryMapper, Category> {
+    @Autowired
+    private BrandCategoryRelationService relationService;
+
     /**
      * 获取树形结构
      */
@@ -88,8 +93,12 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> {
     /**
      * 修改
      */
+    @Transactional(rollbackFor = Exception.class)
     @CacheEvict(allEntries = true)
-    public boolean update(CategoryFormRequest formRequest) {
+    public boolean update(CategoryFormRequest formRequest, boolean needFlushName) {
+        if (needFlushName) {
+            relationService.updateCategoryName(formRequest.getId(), formRequest.getName());
+        }
         Category category = new Category();
         BeanUtils.copyProperties(formRequest, category);
         return super.updateById(category);

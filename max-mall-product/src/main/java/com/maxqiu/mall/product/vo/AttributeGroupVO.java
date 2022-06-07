@@ -10,7 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 属性分组
+ * 属性分组 VO
  *
  * @author Max_Qiu
  */

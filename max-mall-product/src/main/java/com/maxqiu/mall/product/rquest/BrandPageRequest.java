@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
+ * 商品品牌 分页
+ *
  * @author Max_Qiu
  */
 @Getter

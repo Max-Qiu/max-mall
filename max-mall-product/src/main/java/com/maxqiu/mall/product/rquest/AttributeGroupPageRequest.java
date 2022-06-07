@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 属性分组分页请求
+ * 属性分组 分页
  *
  * @author Max_Qiu
  */

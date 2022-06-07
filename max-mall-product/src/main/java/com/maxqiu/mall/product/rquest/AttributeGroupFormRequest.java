@@ -14,7 +14,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 属性分组
+ * 属性分组 表单
  *
  * @author Max_Qiu
  */

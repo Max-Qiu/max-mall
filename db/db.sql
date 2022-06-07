@@ -38,6 +38,16 @@ INSERT INTO `mm_brand` VALUES (7,'VIVO',NULL,'V');
 INSERT INTO `mm_brand` VALUES (8,'诺基亚',NULL,'N');
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mm_brand_category_relation` (
+  `brand_id` int unsigned NOT NULL COMMENT '品牌id',
+  `category_id` int unsigned NOT NULL COMMENT '分类id',
+  `brand_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '品牌名称',
+  `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '分类名称',
+  PRIMARY KEY (`brand_id`,`category_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='品牌分类关联';
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mm_category` (
   `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '分类id',
   `name` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '分类名称',

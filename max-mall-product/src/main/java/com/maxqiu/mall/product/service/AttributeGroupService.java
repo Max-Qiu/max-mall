@@ -28,7 +28,7 @@ public class AttributeGroupService extends ServiceImpl<AttributeGroupMapper, Att
         if (pageRequest.getCategoryId() != null) {
             wrapper.eq(AttributeGroup::getCategoryId, pageRequest.getCategoryId());
         }
-        return page(page, wrapper);
+        return super.page(page, wrapper);
     }
 
     /**
@@ -37,7 +37,7 @@ public class AttributeGroupService extends ServiceImpl<AttributeGroupMapper, Att
     public boolean create(AttributeGroupFormRequest formRequest) {
         AttributeGroup attributeGroup = new AttributeGroup();
         BeanUtils.copyProperties(formRequest, attributeGroup);
-        return this.save(attributeGroup);
+        return super.save(attributeGroup);
     }
 
     /**
@@ -46,13 +46,13 @@ public class AttributeGroupService extends ServiceImpl<AttributeGroupMapper, Att
     public boolean update(AttributeGroupFormRequest formRequest) {
         AttributeGroup attributeGroup = new AttributeGroup();
         BeanUtils.copyProperties(formRequest, attributeGroup);
-        return this.updateById(attributeGroup);
+        return super.updateById(attributeGroup);
     }
 
     /**
      * 删除
      */
     public boolean delete(Integer id) {
-        return this.removeById(id);
+        return super.removeById(id);
     }
 }

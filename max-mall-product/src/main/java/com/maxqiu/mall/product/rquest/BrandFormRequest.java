@@ -17,7 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 商品品牌
+ * 商品品牌 表单
  *
  * @author Max_Qiu
  */

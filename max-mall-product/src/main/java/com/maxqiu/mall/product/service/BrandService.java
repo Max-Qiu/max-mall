@@ -1,10 +1,12 @@
 package com.maxqiu.mall.product.service;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -24,6 +26,9 @@ import com.maxqiu.mall.product.rquest.BrandPageRequest;
 @Service
 @CacheConfig(cacheNames = "BrandService", keyGenerator = "cacheKeyGenerator")
 public class BrandService extends ServiceImpl<BrandMapper, Brand> {
+    @Autowired
+    private BrandCategoryRelationService relationService;
+
     /**
      * 根据品牌名称分页获取列表
      */
@@ -33,7 +38,7 @@ public class BrandService extends ServiceImpl<BrandMapper, Brand> {
         if (StringUtils.hasText(pageRequest.getName())) {
             wrapper.like(Brand::getName, pageRequest.getName());
         }
-        return page(page, wrapper);
+        return super.page(page, wrapper);
     }
 
     /**
@@ -57,8 +62,12 @@ public class BrandService extends ServiceImpl<BrandMapper, Brand> {
     /**
      * 修改
      */
+    @Transactional(rollbackFor = Exception.class)
     @CacheEvict(allEntries = true)
-    public boolean update(BrandFormRequest formRequest) {
+    public boolean update(BrandFormRequest formRequest, boolean needFlushName) {
+        if (needFlushName) {
+            relationService.updateBrandName(formRequest.getId(), formRequest.getName());
+        }
         Brand brand = new Brand();
         BeanUtils.copyProperties(formRequest, brand);
         return super.updateById(brand);
