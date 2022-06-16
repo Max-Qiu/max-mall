@@ -45,7 +45,8 @@ public class AttributeController {
     @GetMapping("group/page")
     public Result<PageResult<AttributeGroupVO>> groupPage(AttributeGroupPageRequest pageRequest) {
         Page<AttributeGroup> page = attributeGroupService.pageByCategoryId(pageRequest);
-        List<AttributeGroupVO> collect = page.getRecords().stream().map(AttributeGroupVO::new).collect(Collectors.toList());
+        List<AttributeGroupVO> collect = page.getRecords().stream()
+            .map(e -> new AttributeGroupVO(e, categoryService.getById(e.getCategoryId()).getName())).collect(Collectors.toList());
         return Result.success(new PageResult<>(collect, page));
     }
 

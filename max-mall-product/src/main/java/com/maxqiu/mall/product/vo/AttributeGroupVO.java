@@ -44,7 +44,13 @@ public class AttributeGroupVO {
      */
     private Integer categoryId;
 
-    public AttributeGroupVO(AttributeGroup attributeGroup) {
+    /**
+     * 所属分类名称
+     */
+    private String categoryName;
+
+    public AttributeGroupVO(AttributeGroup attributeGroup, String categoryName) {
         BeanUtils.copyProperties(attributeGroup, this);
+        this.categoryName = categoryName;
     }
 }

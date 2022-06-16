@@ -39,6 +39,11 @@ public class BrandVO {
      */
     private String initial;
 
+    /**
+     * 状态
+     */
+    private Boolean status;
+
     public BrandVO(Brand brand) {
         BeanUtils.copyProperties(brand, this);
     }

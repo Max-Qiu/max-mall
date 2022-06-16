@@ -1,6 +1,7 @@
 package com.maxqiu.mall.product.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -53,10 +54,10 @@ public class Category extends Model<Category> {
     private Integer level;
 
     /**
-     * 是否显示
+     * 状态
      */
-    @TableField("show_status")
-    private Boolean showStatus;
+    @TableField("`status`")
+    private Boolean status;
 
     /**
      * 排序
@@ -75,6 +76,18 @@ public class Category extends Model<Category> {
      */
     @TableField("product_count")
     private Integer productCount;
+
+    /**
+     * 创建时间
+     */
+    @TableField("create_time")
+    private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    @TableField("update_time")
+    private LocalDateTime updateTime;
 
     @Override
     public Serializable pkVal() {

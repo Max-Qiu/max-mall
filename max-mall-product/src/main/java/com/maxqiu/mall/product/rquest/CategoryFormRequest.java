@@ -53,7 +53,7 @@ public class CategoryFormRequest {
      * 是否显示
      */
     @NotNull(groups = {CreateValidGroup.class, UpdateValidGroup.class})
-    private Boolean showStatus;
+    private Boolean status;
 
     /**
      * 排序

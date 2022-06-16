@@ -77,7 +77,7 @@ public class CategoryController {
             return Result.fail("当前分类ID不存在");
         }
         // 当隐藏菜单时
-        if (!formRequest.getShowStatus()) {
+        if (!formRequest.getStatus()) {
             // 当前分类有商品在上架，不可以隐藏
             if (current.getProductCount() != 0) {
                 return Result.fail("当前分类有商品在上架时，不可以隐藏");

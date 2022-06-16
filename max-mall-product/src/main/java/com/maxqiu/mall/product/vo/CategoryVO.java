@@ -43,9 +43,9 @@ public class CategoryVO {
     private Integer level;
 
     /**
-     * 是否显示 0不显示 1显示
+     * 状态
      */
-    private Boolean showStatus;
+    private Boolean status;
 
     /**
      * 排序

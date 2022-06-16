@@ -51,4 +51,10 @@ public class BrandFormRequest {
     @NotBlank(groups = {CreateValidGroup.class, UpdateValidGroup.class})
     @Pattern(regexp = "^[A-Z]$", groups = {CreateValidGroup.class, UpdateValidGroup.class}, message = "只支持一个英文大写字母")
     private String initial;
+
+    /**
+     * 状态
+     */
+    @NotBlank(groups = {CreateValidGroup.class, UpdateValidGroup.class})
+    private Boolean status;
 }

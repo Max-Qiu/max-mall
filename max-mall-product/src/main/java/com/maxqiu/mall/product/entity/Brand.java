@@ -1,6 +1,7 @@
 package com.maxqiu.mall.product.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -51,6 +52,24 @@ public class Brand extends Model<Brand> {
      */
     @TableField("`initial`")
     private String initial;
+
+    /**
+     * 状态
+     */
+    @TableField("`status`")
+    private Boolean status;
+
+    /**
+     * 创建时间
+     */
+    @TableField("create_time")
+    private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    @TableField("update_time")
+    private LocalDateTime updateTime;
 
     @Override
     public Serializable pkVal() {
