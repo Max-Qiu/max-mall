@@ -10,7 +10,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maxqiu.mall.product.entity.AttributeGroup;
 import com.maxqiu.mall.product.mapper.AttributeGroupMapper;
 import com.maxqiu.mall.product.rquest.AttributeGroupFormRequest;
-import com.maxqiu.mall.product.rquest.AttributeGroupPageRequest;
 
 /**
  * 属性分组 服务类
@@ -22,11 +21,11 @@ public class AttributeGroupService extends ServiceImpl<AttributeGroupMapper, Att
     /**
      * 根据分类ID获取属性分组
      */
-    public Page<AttributeGroup> pageByCategoryId(AttributeGroupPageRequest pageRequest) {
-        Page<AttributeGroup> page = new Page<>(pageRequest.getPageNumber(), pageRequest.getPageSize());
+    public Page<AttributeGroup> pageByCategoryId(Integer pageNumber, Integer pageSize, Integer categoryId) {
+        Page<AttributeGroup> page = new Page<>(pageNumber, pageSize);
         LambdaQueryWrapper<AttributeGroup> wrapper = Wrappers.lambdaQuery();
-        if (pageRequest.getCategoryId() != null) {
-            wrapper.eq(AttributeGroup::getCategoryId, pageRequest.getCategoryId());
+        if (categoryId != null) {
+            wrapper.eq(AttributeGroup::getCategoryId, categoryId);
         }
         return super.page(page, wrapper);
     }

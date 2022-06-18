@@ -8,6 +8,22 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `max_mall_product` /*!40100 DEFAULT CHA
 USE `max_mall_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mm_attribute` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '属性id',
+  `name` char(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '属性名',
+  `type` tinyint unsigned NOT NULL COMMENT '类型 1销售属性 2基本属性',
+  `value_type` tinyint unsigned NOT NULL COMMENT '值类型 1单选 2多选',
+  `values` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '可选值列表',
+  `status` tinyint unsigned NOT NULL COMMENT '状态 0关闭 1启用',
+  `category_id` int unsigned NOT NULL COMMENT '所属分类ID',
+  `group_id` int unsigned DEFAULT NULL COMMENT '属性分组ID',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品属性';
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mm_attribute_group` (
   `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '属性分组ID',
   `name` char(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '分组名称',
